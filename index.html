@@ -5,181 +5,237 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YASHX ULTIMATE 200</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif}
-body{background:#000;color:#fff;padding-bottom:70px}
-.hero{height:70vh;background:url('https://image.tmdb.org/t/p/original/8I37NtDffNV7AZlDa7uDvvqhovU.jpg') center/cover;position:relative}
-.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent, #000)}
-.hero-content{position:absolute;bottom:20px;left:15px;right:15px;z-index:2}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding-bottom:80px}
+.hero{height:70vh;background:url('https://image.tmdb.org/t/p/original/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg') center/cover;position:relative}
+.hero:after{content:'';position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(transparent,#000)}
+.hero-content{position:absolute;bottom:20px;left:15px;right:15px}
 .badge{color:#e50914;font-size:12px;font-weight:bold;margin-bottom:5px}
 h1{font-size:40px;margin-bottom:5px}
-.info{font-size:13px;color:#ccc;margin-bottom:8px}
+.info{font-size:13px;color:#ccc;margin-bottom:10px}
 .stars{color:#ffa500;font-size:14px;margin-bottom:15px}
 .btns{display:flex;gap:10px}
 button{padding:10px 20px;border:none;border-radius:5px;font-weight:bold;font-size:15px}
 .btn-play{background:#fff;color:#000}
 .btn-list{background:rgba(109,109,110,.7);color:#fff}
-.menu{display:flex;gap:10px;padding:15px;overflow:auto}
-.menu button{background:#333;color:#fff;border-radius:20px;padding:8px 15px;font-size:14px}
-.menu button.active{background:#e50914}
+.menu{display:flex;gap:15px;padding:15px;overflow-x:auto}
+.menu button{background:none;border:none;color:#ccc;font-size:16px;padding:5px 0}
+.menu button.active{color:#fff;border-bottom:2px solid #e50914}
 .section{padding:15px}
 .section h2{font-size:20px;margin-bottom:10px}
-.row{display:flex;gap:10px;overflow:auto;padding:10px 0}
-.card{min-width:120px}
-.card img{width:120px;border-radius:8px}
-.card p{font-size:12px;margin-top:5px}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#111;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #222}
-.nav-item{text-align:center;font-size:11px;color:#666}
-.nav-item.active{color:#e50914}
-.nav-icon{font-size:22px;display:block}
+.row{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px}
+.card{flex:0 0 110px}
+.card img{width:110px;height:165px;border-radius:4px;object-fit:cover}
+.card p{font-size:12px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#141414;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #333}
+.bottom-nav button{background:none;border:none;color:#ccc;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bottom-nav button.active{color:#e50914}
 </style>
 </head>
 <body>
 
 <div class="hero">
 <div class="hero-content">
-<div class="badge">N°1 EN FRANCE</div>
+<div class="badge">TOP 1 FILMS AUJOURD'HUI</div>
 <h1>Oppenheimer</h1>
-<div class="info">2023 • 3h • Drame historique</div>
-<div class="stars">★★ 4.8/5</div>
+<div class="info">2023 • 3h 0m • Drame, Histoire</div>
+<div class="stars">★★★ 8.3</div>
 <div class="btns">
-<button class="btn-play" onclick="playVideo()">▶ Regarder</button>
-<button class="btn-list" onclick="addList()">+ Ma liste</button>
+<button class="btn-play">▶ Lecture</button>
+<button class="btn-list">+ Ma liste</button>
 </div>
 </div>
 </div>
 
 <div class="menu">
-<button class="active" onclick="filterCat('all', this)">Tendance</button>
-<button onclick="filterCat('film', this)">Films</button>
-<button onclick="filterCat('serie', this)">Séries</button>
-<button onclick="filterCat('anime', this)">Animés</button>
+<button class="active" onclick="filterCat('all')">Tendance</button>
+<button onclick="filterCat('films')">Films</button>
+<button onclick="filterCat('series')">Séries</button>
+<button onclick="filterCat('animes')">Animés</button>
 </div>
 
-<!-- 100 FILMS -->
 <div class="section">
-<h2>🔥 100 Films Blockbusters</h2>
-<div class="row">
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"><p>Oppenheimer</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/1E5baAaEse26fej7uHcjJRR34sE.jpg"><p>Dune 2</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/kDp1vUBnMpe8aNB6mYbq4MGL4z9.jpg"><p>Deadpool 3</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/rLb2cwF3Pazuxaj0sRXQ037tGI1.jpg"><p>Furiosa</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg"><p>Bad Boys 4</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/wwemzKWzjKYJFfCeiB57q3r4Bcm.jpg"><p>Avengers Endgame</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/d5NXSklXo0qyIYkgV94XAgMIckC.jpg"><p>Dune 1</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/lyQBXzOQSuE59IsHyhrpSkh0Bu.jpg"><p>Interstellar</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/qJ2tW6WMUDux911r6m7haRef0WH.jpg"><p>The Dark Knight</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/6DrHO1jr3qjVsNIGAGLY5eHAm5I.jpg"><p>Gladiator 2</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"><p>John Wick 4</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg"><p>Venom 3</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/uUiIGztXVFc5p7tWwwRu9oNnfE9.jpg"><p>Mission Impossible 7</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/2CAL2433ZeIihfX1Hb2139CX0pW.jpg"><p>Avatar 2</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/tMefBSflR6PGbA5WxwZbAIuJCqA.jpg"><p>Barbie</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/hdFNh3DQ6kA5m3dkB7g1qiO4Aib.jpg"><p>Killers of Moon</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/2cxhvwyEwRhy9lENeGClhdgNwmR.jpg"><p>Fast X</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/6x9WS8YdsPF9Ayt2bOeEOG8EJJ7.jpg"><p>Batman 2022</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/rjkmN1dniUHwjlJzGsWzg1R6PbR.jpg"><p>Spider-Man NWH</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/gOnmaxHo0QC6p4ST9X8FtfeGkbd.jpg"><p>Top Gun Maverick</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/lmZFxXgIhSsIU4LAhDlWO1bfOdn.jpg"><p>Inception</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/f89U3ADr1oi3THf8ph2m0F0dQdm.jpg"><p>Matrix</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"><p>Titanic</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg"><p>Joker</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg"><p>Shazam 2</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg"><p>Hunger Games</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/6KErczPB9OU46zdcCnOgf7o5SKq.jpg"><p>Transformers</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/2u7zbn8EudGjgiIhk8QC70f9Cbb.jpg"><p>Guardians 3</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/1E5baAaEse26fej7uHcjJRR34sE.jpg"><p>Ant-Man 3</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/2l0n8BjL2QfHYIUp9GcJ8J3YwZQ.jpg"><p>Wakanda Forever</p></div>
-<!-- +70 films... Inception, Matrix, Titanic, Lion King, Frozen, Toy Story, Shrek, Fast, Hobbit, etc -->
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/p5Zs1QnqV9kI1HjLM5H7uGJLEAI.jpg"><p>Parasite</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/5p0v22ELXsYmbZpJlIPMBmpKDws.jpg"><p>Fight Club</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/9O7gLzmreU0nGkIB6K3BsJbzvNv.jpg"><p>Pulp Fiction</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/rPdtLWNsZmAtoZl9z7n3KZNCcWq.jpg"><p>Forrest Gump</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/zfbjgQE1uSd9wiPTX4VzsLi0rGG.jpg"><p>The Lion King</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg"><p>Frozen 2</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/5AJupUjBkgTUwQap1rYshwA2KT.jpg"><p>Toy Story 4</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/iB64vpL3dIzbpqZS5ua9nbUHQXw.jpg"><p>Shrek</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/3QaTDXBOi1HVeyIXwFtVgAUJbDJ.jpg"><p>Hobbit 1</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/x2RS3uTcsJJ9IfjNPcgDmukoEcQ.jpg"><p>Lord of Rings</p></div>
-<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/yVQVsEh7AiTb7LTtUWnN8eAe6Xk.jpg"><p>Harry Potter 7</p></div>
-<!-- Répète jusqu’à 100 films total -->
-</div>
+<h2>🔥 100 Blockbusters du moment</h2>
+<div class="row" id="films-row"></div>
 </div>
 
-<!-- 100 SÉRIES -->
 <div class="section">
 <h2>📺 100 Séries Binge-Watching</h2>
-<div class="row">
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/1X4cs7Gjx3A3X49rKtAUvV3nVcf.jpg"><p>Breaking Bad</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/49WJfeN0edf8NOI6WMIlVDoCaWT.jpg"><p>La Casa de Papel</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><p>Peaky Blinders</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/9Uzzk7kNmi0Ei6feEsiRTng.jpg"><p>Squid Game</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/mWSBsLW6HtzgOX7OoL6bz0rVjWb.jpg"><p>Mercredi</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/7QtHh0n4eQdcvLrVAHhAmV7aCd3.jpg"><p>The 100</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/cva3CG7aUmfc7paD1SaRs7KnRiz.jpg"><p>Dark</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/mBYqfRhbwtEYsZYSRh6iZRXtXbd.jpg"><p>Prison Break</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg"><p>Stranger Things</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/9PFonBhyj1RFJNHaOzzJhn6BzLx.jpg"><p>Game of Thrones</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/rYmtjz5WWgmIgPj1o6IWAFEs5hM.jpg"><p>The Witcher</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/4hOAKl3lZ9W5SKYt3DrtqMLth2Q.jpg"><p>Suits</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/6JDpfsUvg0A5j9eaB4QoZ7rOh7n.jpg"><p>All American</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/9gy4Iuax33x7ad9f3VwInhWQ3IQ.jpg"><p>Vikings</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/1mQNFSpj9bF3M6QHya7tTLg70pP.jpg"><p>Money Heist</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/seNf0U0rGkAc2s13cv2tVVo2POB.jpg"><p>The Office</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/fEEfN5ypEp5ipYXOpYVwpTatVVL.jpg"><p>Friends</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/w3sUQLgsxFhj6UJcUWRU78yZ1Xs.jpg"><p>The Walking Dead</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/3gwE36jkYWVDHZNNZEBX2grXlCY.jpg"><p>Rick and Morty</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/pTEZQD6yyrzq56VDdIb2NJrCXxa.jpg"><p>How I Met Mother</p></div>
-<!-- +80 séries... Modern Family, Big Bang Theory, Arrow, Flash, Superman, Lucifer, etc -->
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/wyowL8phx7GOWT1V9F4zrGAU7YV.jpg"><p>Modern Family</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/ooBGRQBdbGzBxAVfExn7jBo6sj8.jpg"><p>Big Bang Theory</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg"><p>Arrow</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/lJA2RCMfs.h1iZrUkR6QggV5e8k.jpg"><p>The Flash</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/cbnVj8eV49a1h1ok2skSOOWQKPd.jpg"><p>Superman Lois</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/ekZobS8isE6mA53RAiGDG93hBxL.jpg"><p>Lucifer</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/gbUPFA8UlYfHmu9kTLE0Zq85v09.jpg"><p>Supernatural</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/xOGqUGoUxaOlF1iWbE9j3IFV7nO.jpg"><p>The Crown</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/1RoeXgkg8D4RQjE44eNrca2HWFY.jpg"><p>Ozark</p></div>
-<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/z7shrg2sMGdauOVZLEF1XkWFICu.jpg"><p>Elite</p></div>
-<!-- Répète jusqu’à 100 séries total -->
-</div>
+<div class="row" id="series-row"></div>
 </div>
 
-<!-- ANIMÉS -->
 <div class="section">
-<h2>🔥 Animés</h2>
-<div class="row">
-<div class="card" data-cat="anime"><img src="https://image.tmdb.org/t/p/w300/6Wdl9N6dL0Hi0T1qIDd2tAqLAEK.jpg"><p>One Piece</p></div>
-<div class="card" data-cat="anime"><img src="https://image.tmdb.org/t/p/w300/9pHxvHQq5hsqn9uVao7fjU7g9vt.jpg"><p>Demon Slayer</p></div>
-<div class="card" data-cat="anime"><img src="https://image.tmdb.org/t/p/w300/gI7yZ9ZO5NUQhCWJ8m7rNJkKAF.jpg"><p>Attack Titan</p></div>
-<div class="card" data-cat="anime"><img src="https://image.tmdb.org/t/p/w300/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"><p>Naruto</p></div>
-<div class="card" data-cat="anime"><img src="https://image.tmdb.org/t/p/w300/mxKvdOvUNiN9pyhVtiN8TpF3EAb.jpg"><p>Dragon Ball</p></div>
-</div>
+<h2>🔥 Animés Légendaires</h2>
+<div class="row" id="animes-row"></div>
 </div>
 
 <div class="bottom-nav">
-<div class="nav-item active" onclick="goNav(this)"><span class="nav-icon">Y</span>Accueil</div>
-<div class="nav-item" onclick="goNav(this)"><span class="nav-icon">🔍</span>Recherche</div>
-<div class="nav-item" onclick="goNav(this)"><span class="nav-icon">📁</span>Ma liste</div>
-<div class="nav-item" onclick="goNav(this)"><span class="nav-icon">👤</span>Mon YASHX</div>
+<button class="active"><div>Y</div>Accueil</button>
+<button><div>🔍</div>Recherche</button>
+<button><div>📁</div>Ma liste</button>
+<button><div>👤</div>Mon YASHX</button>
 </div>
 
 <script>
-function playVideo() {alert('🎬 Lecture... Bientôt disponible Chef!')}
-function addList() {alert('✅ Ajouté à Ma liste!')}
-function filterCat(cat, btn) {
-  document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.card').forEach(card => {
-    if(cat === 'all' || card.dataset.cat === cat) card.style.display = 'block';
-    else card.style.display = 'none';
-  });
-}
-function goNav(nav) {
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  nav.classList.add('active');
-  alert('👉 ' + nav.textContent.trim() + ' - Page complète bientôt!');
-}
-</script>
+const films = [
+{title:"Oppenheimer",img:"https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",cat:"films"},
+{title:"Dune 2",img:"https://image.tmdb.org/t/p/w500/czembW0Rk1iJBp3rV4ymXJ0dCPF.jpg",cat:"films"},
+{title:"Deadpool 3",img:"https://image.tmdb.org/t/p/w500/8cdWjvZQU3eXkY1Pygp7JV6zZZq.jpg",cat:"films"},
+{title:"Avatar 2",img:"https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",cat:"films"},
+{title:"Spider-Verse",img:"https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4lsepQcRE9OHxTb5.jpg",cat:"films"},
+{title:"Godzilla x Kong",img:"https://image.tmdb.org/t/p/w500/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",cat:"films"},
+{title:"Kingdom Planet",img:"https://image.tmdb.org/t/p/w500/gKkl37BQuKTanygYQG1xyRww3wX.jpg",cat:"films"},
+{title:"Bad Boys 4",img:"https://image.tmdb.org/t/p/w500/6mfpKukxZEBCOCqHQ4kmUwn7SrO.jpg",cat:"films"},
+{title:"Furiosa",img:"https://image.tmdb.org/t/p/w500/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",cat:"films"},
+{title:"Despicable 4",img:"https://image.tmdb.org/t/p/w500/lqrG5RduFtSNWJ6gqN2oU3Uq45d.jpg",cat:"films"},
+{title:"Inside Out 2",img:"https://image.tmdb.org/t/p/w500/vpnVM9B6NMm4QP0EyxJwgnYm0De.jpg",cat:"films"},
+{title:"Moana 2",img:"https://image.tmdb.org/t/p/w500/lxaPniEhi5WJuqGkq0F7fTTIjBJ.jpg",cat:"films"},
+{title:"Mufasa",img:"https://image.tmdb.org/t/p/w500/jP2jDFHdUUFhWdg8Vvm0Df7qJQ5.jpg",cat:"films"},
+{title:"Sonic 3",img:"https://image.tmdb.org/t/p/w500/d8Ryb8AunYAuycVKDp5HpdWPKgC.jpg",cat:"films"},
+{title:"Kraven",img:"https://image.tmdb.org/t/p/w500/1m9JN17XKJQkNveBgFRht9I0Vhw.jpg",cat:"films"},
+{title:"Gladiator 2",img:"https://image.tmdb.org/t/p/w500/2cxhv0nrskdHgqUnlbWv8ueNx58.jpg",cat:"films"},
+{title:"Venom 3",img:"https://image.tmdb.org/t/p/w500/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",cat:"films"},
+{title:"Twisters",img:"https://image.tmdb.org/t/p/w500/pjnD08FlMAIXsfOLKQbvmO0f0MD.jpg",cat:"films"},
+{title:"Borderlands",img:"https://image.tmdb.org/t/p/w500/wTGw14lfeA6QcjrYYt7RmV0fV5D.jpg",cat:"films"},
+{title:"Alien Romulus",img:"https://image.tmdb.org/t/p/w500/b33nnKl1GSFbao4l3fZDDqsMx0F.jpg",cat:"films"},
+{title:"Transformers One",img:"https://image.tmdb.org/t/p/w500/iq8P5EH31UcrMpngnM1oqrZSYoZ.jpg",cat:"films"},
+{title:"Speak No Evil",img:"https://image.tmdb.org/t/p/w500/fLlPx2wQ62vVseN4OWQWUyMUCeQ.jpg",cat:"films"},
+{title:"Beetlejuice 2",img:"https://image.tmdb.org/t/p/w500/kKgQzkUCnQmeTP2TVejrrgolqth.jpg",cat:"films"},
+{title:"Trap",img:"https://image.tmdb.org/t/p/w500/4aHlt3oTqR1Z63rMq3JjRyuXdm0.jpg",cat:"films"},
+{title:"A Quiet Place",img:"https://image.tmdb.org/t/p/w500/eqZWYXOXl33ovTfMNF5Vae2Jxgu.jpg",cat:"films"},
+{title:"The Substance",img:"https://image.tmdb.org/t/p/w500/lqmPGUf4cPgcWfDRqnJ6V7a6UK1.jpg",cat:"films"},
+{title:"Joker 2",img:"https://image.tmdb.org/t/p/w500/penvjCpl03iN6UG9wx4RCVhU6i8.jpg",cat:"films"},
+{title:"Smile 2",img:"https://image.tmdb.org/t/p/w500/8x4v19qTwyFFi8O7Lahfo0bY84G.jpg",cat:"films"},
+{title:"Wicked",img:"https://image.tmdb.org/t/p/w500/2Ew4Pdd0su0mQgUJmKNW7qR2zrs.jpg",cat:"films"},
+{title:"Red One",img:"https://image.tmdb.org/t/p/w500/cdqLnri3NEGcmfnqwk2Tw3qiy4G.jpg",cat:"films"},
+{title:"Blitz",img:"https://image.tmdb.org/t/p/w500/qB6gvv55VMCNhL1uQVPwiUkB47c.jpg",cat:"films"},
+{title:"Conclave",img:"https://image.tmdb.org/t/p/w500/mpaYuyVmCjieRwY0rUWNwGcCP2p.jpg",cat:"films"},
+{title:"Heretic",img:"https://image.tmdb.org/t/p/w500/c1hPEsYEPBhqBk5fFoWVe4wCtih.jpg",cat:"films"},
+{title:"Nosferatu",img:"https://image.tmdb.org/t/p/w500/hdFIdgAFMx5EqtKDl8wJhzwHZPB.jpg",cat:"films"},
+{title:"Babygirl",img:"https://image.tmdb.org/t/p/w500/iLbQKbhZKzglyDyVh9lcPfgqMte.jpg",cat:"films"},
+{title:"The Wild Robot",img:"https://image.tmdb.org/t/p/w500/wTnV3PCVW5O92JddFipnZ8p13dK.jpg",cat:"films"},
+{title:"It Ends With Us",img:"https://image.tmdb.org/t/p/w500/AjV6jFJ2YFIluYo6GQyHDUq7Zfp.jpg",cat:"films"},
+{title:"Deadpool",img:"https://image.tmdb.org/t/p/w500/3E53WEZJqP6aMcr0prmz4pZN9NZ.jpg",cat:"films"},
+{title:"Deadpool 2",img:"https://image.tmdb.org/t/p/w500/to0spRl1CMDvyUbOnbb4fTk3VAd.jpg",cat:"films"},
+{title:"Logan",img:"https://image.tmdb.org/t/p/w500/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg",cat:"films"},
+{title:"Avengers",img:"https://image.tmdb.org/t/p/w500/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",cat:"films"},
+{title:"Endgame",img:"https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",cat:"films"},
+{title:"Infinity War",img:"https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",cat:"films"},
+{title:"Civil War",img:"https://image.tmdb.org/t/p/w500/rAGiXaUfPzY7CDEyNKUofk3u3ij.jpg",cat:"films"},
+{title:"Black Panther",img:"https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg",cat:"films"},
+{title:"Wakanda",img:"https://image.tmdb.org/t/p/w500/sv1xJUazX7LN49ehnNn5zsbS2ru.jpg",cat:"films"},
+{title:"Thor Ragnarok",img:"https://image.tmdb.org/t/p/w500/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg",cat:"films"},
+{title:"Love Thunder",img:"https://image.tmdb.org/t/p/w500/pIkRyD18kl4FijbprigDWGkBRzW.jpg",cat:"films"},
+{title:"Doctor Strange",img:"https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",cat:"films"},
+{title:"Multiverse",img:"https://image.tmdb.org/t/p/w500/wcKFYfVR3ZIEFR6nsC6p8DuMra0.jpg",cat:"films"},
+{title:"Shang-Chi",img:"https://image.tmdb.org/t/p/w500/1BIoJGKbXjdFDAqUEiA2VHqkK1Z.jpg",cat:"films"},
+{title:"Eternals",img:"https://image.tmdb.org/t/p/w500/6Ad6vFTRTAzggD2QnD7sxGH2rO1.jpg",cat:"films"},
+{title:"Guardians 3",img:"https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgp55EAV.jpg",cat:"films"},
+{title:"Quantumania",img:"https://image.tmdb.org/t/p/w500/qnqGbHH4YzUEyxW8k3Q0X4h9nBo.jpg",cat:"films"},
+{title:"The Marvels",img:"https://image.tmdb.org/t/p/w500/Ag3D9Udo2FeE5gI9PgQ3ByX0wuU.jpg",cat:"films"},
+{title:"Batman",img:"https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",cat:"films"},
+{title:"Joker",img:"https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",cat:"films"},
+{title:"Dark Knight",img:"https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",cat:"films"},
+{title:"Superman",img:"https://image.tmdb.org/t/p/w500/gsVc65gBE63Uq5aTRJwGb4WT6v2.jpg",cat:"films"},
+{title:"Man of Steel",img:"https://image.tmdb.org/t/p/w500/rkB4LyZHo1NHXFEDHl9vSD9r1FZ.jpg",cat:"films"},
+{title:"Wonder Woman",img:"https://image.tmdb.org/t/p/w500/1T9in2oTPlMuyehY0MuAix67q9r.jpg",cat:"films"},
+{title:"Aquaman",img:"https://image.tmdb.org/t/p/w500/5A2bAa3MB5U0HZCAwe2dqmBrPw2.jpg",cat:"films"},
+{title:"Lost Kingdom",img:"https://image.tmdb.org/t/p/w500/8xVpt3zc2ehdKLGi0jEWl60iP3e.jpg",cat:"films"},
+{title:"The Flash",img:"https://image.tmdb.org/t/p/w500/rktDFPbfHfUbArZACnsHki7TdBl.jpg",cat:"films"},
+{title:"Blue Beetle",img:"https://image.tmdb.org/t/p/w500/mXLOHHc1fV861CLz6JzN0MULpBC.jpg",cat:"films"},
+{title:"Fury Road",img:"https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg",cat:"films"},
+{title:"Mad Max",img:"https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg",cat:"films"},
+{title:"John Wick 4",img:"https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",cat:"films"},
+{title:"Chapter 3",img:"https://image.tmdb.org/t/p/w500/ziEuG1essDuWuC5AEmgKichkqID.jpg",cat:"films"},
+{title:"Chapter 2",img:"https://image.tmdb.org/t/p/w500/zkNWfZ2YIgp2YAUy0V1r6aG9QqI.jpg",cat:"films"},
+{title:"Extraction 2",img:"https://image.tmdb.org/t/p/w500/7gKIz5G1el9IpaJK9exXg0s0F79.jpg",cat:"films"},
+{title:"Extraction",img:"https://image.tmdb.org/t/p/w500/xD5OOSG5QgQA9BkK5HuO4VuHsOc.jpg",cat:"films"},
+{title:"The Gray Man",img:"https://image.tmdb.org/t/p/w500/8cXbitsS6dWQ5gfMTZdM7lDUl0o.jpg",cat:"films"},
+{title:"Heart of Stone",img:"https://image.tmdb.org/t/p/w500/rX5Vto2lSgEia77g6Y0Y6fA6yXF.jpg",cat:"films"},
+{title:"Rebel Moon",img:"https://image.tmdb.org/t/p/w500/uiFcFIuV8vaWgRuU5snTYCm9wTU.jpg",cat:"films"},
+{title:"Leave World",img:"https://image.tmdb.org/t/p/w500/c2erH3KUe6R55Uqu3bcZG7SvYt2.jpg",cat:"films"},
+{title:"Killers Moon",img:"https://image.tmdb.org/t/p/w500/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg",cat:"films"},
+{title:"Napoleon",img:"https://image.tmdb.org/t/p/w500/jE5o7yplZnLoHjqhMldAWkYUgCb.jpg",cat:"films"},
+{title:"Oppenheimer",img:"https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",cat:"films"},
+{title:"Barbie",img:"https://image.tmdb.org/t/p/w500/iuFNMS8U5cb6f4CP1QDR2yf2YHW.jpg",cat:"films"},
+{title:"Mission Impossible",img:"https://image.tmdb.org/t/p/w500/NNxYkU70HPurnNCSiCjYAmacwm.jpg",cat:"films"},
+{title:"Fast X",img:"https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclnYD.jpg",cat:"films"},
+{title:"Indiana Jones",img:"https://image.tmdb.org/t/p/w500/Af4bXE63pVsb2FtbW8uYI9Xky8A.jpg",cat:"films"},
+{title:"Elemental",img:"https://image.tmdb.org/t/p/w500/8riWcADI1ekEiBguVB9vkilhi8B.jpg",cat:"films"},
+{title:"Little Mermaid",img:"https://image.tmdb.org/t/p/w500/ym1dxyOk4iFvBk93qYw6s1vFbMV.jpg",cat:"films"},
+{title:"Trolls 3",img:"https://image.tmdb.org/t/p/w500/d8C99dnRWkpJZu2iA8oJgP3oyQy.jpg",cat:"films"},
+{title:"Migration",img:"https://image.tmdb.org/t/p/w500/lDZGQjWmH24HGy0KYnMp9E9x1fO.jpg",cat:"films"},
+{title:"Paw Patrol",img:"https://image.tmdb.org/t/p/w500/aat72ePnsaSZ2aDg9OgcDWS4nnK.jpg",cat:"films"},
+{title:"TMNT",img:"https://image.tmdb.org/t/p/w500/wgwL3wsuQIwI2O5v9XbUmJkG5DX.jpg",cat:"films"},
+{title:"Ruby Gilman",img:"https://image.tmdb.org/t/p/w500/fIRXMT6yNRv7a6Wf0aNwDxOuhHQ.jpg",cat:"films"},
+{title:"Wish",img:"https://image.tmdb.org/t/p/w500/aheErH9f0wUUobuy3WupqRLd72c.jpg",cat:"films"},
+{title:"Wonka",img:"https://image.tmdb.org/t/p/w500/qhb1qOilapbapxWQn9jt04OV0w.jpg",cat:"films"},
+{title:"Five Nights",img:"https://image.tmdb.org/t/p/w500/SQERCCnrgQS87cWuykWnMOeDKJV.jpg",cat:"films"},
+{title:"Exorcist",img:"https://image.tmdb.org/t/p/w500/kDp1vUBnMpe8ak4rjgl3cLELqjU.jpg",cat:"films"},
+{title:"Saw X",img:"https://image.tmdb.org/t/p/w500/azXFMKZJc3WU6SFXqmn0H2DMuS1.jpg",cat:"films"},
+{title:"Evil Dead",img:"https://image.tmdb.org/t/p/w500/mIBCtPvKZgppfCoedI6NFHl3FeG.jpg",cat:"films"},
+{title:"Insidious 5",img:"https://image.tmdb.org/t/p/w500/3G1Q5xF40HkUBJXxt2DQgQzKTp5.jpg",cat:"films"},
+{title:"Nun II",img:"https://image.tmdb.org/t/p/w500/4cyUgT9GG5FZDfvMRZVx3YtImwE.jpg",cat:"films"},
+{title:"Scream VI",img:"https://image.tmdb.org/t/p/w500/wDWwtvkRRlgTiUr6TyLSMXlu.mg.jpg",cat:"films"},
+{title:"Megan",img:"https://image.tmdb.org/t/p/w500/3dbonSDPZ6mwwEW6BaO6DUcKAIo.jpg",cat:"films"},
+{title:"Cocaine Bear",img:"https://image.tmdb.org/t/p/w500/gOnmaxHoJZG4TPZxGzGLVQSKvwL.jpg",cat:"films"},
+{title:"M3GAN",img:"https://image.tmdb.org/t/p/w500/3dbonSDPZ6mwwEW6BaO6DUcKAIo.jpg",cat:"films"},
+{title:"Creed 3",img:"https://image.tmdb.org/t/p/w500/cvsXj3I9Q2iyyIoP7A0BhtRwTdo.jpg",cat:"films"},
+{title:"Rocky",img:"https://image.tmdb.org/t/p/w500/jONs4fZ4rmc1XdMQYfWcv8Wku0Q.jpg",cat:"films"}
+];
 
-</body>
-</html>
+const series = [
+{title:"Breaking Bad",img:"https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",cat:"series"},
+{title:"Better Call Saul",img:"https://image.tmdb.org/t/p/w500/5v8SJr8PIaZ4AgONbOEPiFt6cvi.jpg",cat:"series"},
+{title:"The Last of Us",img:"https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg",cat:"series"},
+{title:"House of Dragon",img:"https://image.tmdb.org/t/p/w500/1AFMfrIQhDOitgDFzcNANQFt9lt.jpg",cat:"series"},
+{title:"The Boys",img:"https://image.tmdb.org/t/p/w500/mY7SeH4HFFxW1hiI6cWuwCRPpn.jpg",cat:"series"},
+{title:"Gen V",img:"https://image.tmdb.org/t/p/w500/5wU61SWsh4f7LJXFLy0szHQqypo.jpg",cat:"series"},
+{title:"Wednesday",img:"https://image.tmdb.org/t/p/w500/9PFonBhy4cQyC5l7BNnIoAMitli.jpg",cat:"series"},
+{title:"Stranger Things",img:"https://image.tmdb.org/t/p/w500/49WJfeN0moxb9IPfGn8AIqMGskD.jpg",cat:"series"},
+{title:"The Witcher",img:"https://image.tmdb.org/t/p/w500/7vjaCdMwqkbBlYha5Bpt0CWmzbW.jpg",cat:"series"},
+{title:"Squid Game",img:"https://image.tmdb.org/t/p/w500/dDlEmu3EZ0Pgg93K2SVNLCjCSvE.jpg",cat:"series"},
+{title:"Money Heist",img:"https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2NkRPn.jpg",cat:"series"},
+{title:"Peaky Blinders",img:"https://image.tmdb.org/t/p/w500/vUUqzWa2LnHIVqkaeWbmYC1sNni.jpg",cat:"series"},
+{title:"Dark",img:"https://image.tmdb.org/t/p/w500/aKuFiU82s5kFg7co5c2zTPW2Idz.jpg",cat:"series"},
+{title:"1899",img:"https://image.tmdb.org/t/p/w500/cfT29GP1NT4x0IQyvM7SkZ2TQK2.jpg",cat:"series"},
+{title:"The Crown",img:"https://image.tmdb.org/t/p/w500/1M876KPjulVwppEpldhdc8V4o68.jpg",cat:"series"},
+{title:"Bridgerton",img:"https://image.tmdb.org/t/p/w500/gf6pcLx9vH2h15BSLovxRj2cBqP.jpg",cat:"series"},
+{title:"Queen Charlotte",img:"https://image.tmdb.org/t/p/w500/4sdcKEnbSCv3mbzw5OKvqt5hKZE.jpg",cat:"series"},
+{title:"The Witcher Blood",img:"https://image.tmdb.org/t/p/w500/qeJ4zhHHVXFzIIH7bquvCpwj7W7.jpg",cat:"series"},
+{title:"All Quiet West",img:"https://image.tmdb.org/t/p/w500/hYqOjJ7Gh1fbqXrMAp0Wv60aj3i.jpg",cat:"series"},
+{title:"1899",img:"https://image.tmdb.org/t/p/w500/cfT29GP1NT4x0IQyvM7SkZ2TQK2.jpg",cat:"series"},
+{title:"Wednesday S2",img:"https://image.tmdb.org/t/p/w500/9PFonBhy4cQyC5l7BNnIoAMitli.jpg",cat:"series"},
+{title:"One Piece Live",img:"https://image.tmdb.org/t/p/w500/czembW0Rk1iJBp3rV4ymXJ0dCPF.jpg",cat:"series"},
+{title:"Loki S2",img:"https://image.tmdb.org/t/p/w500/kEl2t3OhXc3Zb9lBmqv7aj2Ah2v.jpg",cat:"series"},
+{title:"Ahsoka",img:"https://image.tmdb.org/t/p/w500/tVYVTqzeGypKlXjWXR0YjKz5yIQ.jpg",cat:"series"},
+{title:"Andor",img:"https://image.tmdb.org/t/p/w500/59SVNwLfoMnZPPB6ukNCvhgN0bq.jpg",cat:"series"},
+{title:"Mandalorian",img:"https://image.tmdb.org/t/p/w500/eW1Kt3xWV5oK6E5ZjEdX4iNJqIb.jpg",cat:"series"},
+{title:"Obi-Wan",img:"https://image.tmdb.org/t/p/w500/jfEVU9UOzfXejrMlfMq2A18Af30.jpg",cat:"series"},
+{title:"Book Boba",img:"https://image.tmdb.org/t/p/w500/gNBC8DBX8EyyBRXLO6CLYSh7YmU.jpg",cat:"series"},
+{title:"Reacher",img:"https://image.tmdb.org/t/p/w500/gzKDBEPVJpCOzQI7b3m3FgRYvZ3.jpg",cat:"series"},
+{title:"Jack Ryan",img:"https://image.tmdb.org/t/p/w500/6KxDFQZzYUF7w1OMR5dXn0RLwKL.jpg",cat:"series"},
+{title:"Tom Clancy",img:"https://image.tmdb.org/t/p/w500/6KxDFQZzYUF7w1OMR5dXn0RLwKL.jpg",cat:"series"},
+{title:"The Terminal List",img:"https://image.tmdb.org/t/p/w500/qy3KkM6JdV4vWQW5UJL3wTtZjxL.jpg",cat:"series"},
+{title:"Reacher S2",img:"https://image.tmdb.org/t/p/w500/gzKDBEPVJpCOzQI7b3m3FgRYvZ3.jpg",cat:"series"},
+{title:"The Bear",img:"https://image.tmdb.org/t/p/w500/m2gUOhFqIS2vV4UUS0du6rrl9zG.jpg",cat:"series"},
+{title:"Succession",img:"https://image.tmdb.org/t/p/w500/7jEV73aX5uBURAwry9Zg7db38s.jpg",cat:"series"},
+{title:"White Lotus",img:"https://image.tmdb.org/t/p/w500/8LyjzvYX5U3Uu3tEgfQYlKcZcIi.jpg",cat:"series"},
+{title:"Yellowstone",img:"https://image.tmdb.org/t/p/w500/qhQAwqbDfhEwUuDCKCQ5B7J6N0o.jpg",cat:"series"},
+{title:"1923",img:"https://image.tmdb.org/t/p/w500/3KT3heZHqKBZ9pdyqr9J5HhOmH.jpg",cat:"series"},
+{title:"1883",img:"https://image.tmdb.org/t/p/w500/3I4tTdaYvSZf69sTz7cXqyz9ekg.jpg",cat:"series"},
+{title:"Tulsa King",img:"https://image.tmdb.org/t/p/w500/kdPMUMJzyYdjwg9WoANRFTQa7M1.jpg",cat:"series"},
+{title:"Mayor Kingstown",img:"https://image.tmdb.org/t/p/w500/1nvjtQeY1KZ0qlunZqVJ1I1Evcp.jpg",cat:"series"},
+{title:"Special Ops",img:"https://image.tmdb.org/t/p/w500/2NV2PBGcrqz2on6I02mzOCLdDeH.jpg",cat:"series"},
+{title:"Lioness",img:"https://image.tmdb.org/t/p/w500/2NV2PBGcrqz2on6I02mzOCLdDeH.jpg",cat:"series"},
+{title:"1923 S2",img:"https://image.tmdb.org/t/p/w500/3KT3heZHqKBZ9pdyqr9J5HhOmH.jpg",cat:"series"},
+{title:"The Last Kingdom",img:"https://image.tmdb.org/t/p/w500/gvTz8yZUx8FnHc5wSNLkHjRLu2R.jpg",cat:"series"},
+{title:"Seven Kingdoms",img:"https://image.tmdb.org/t/p/w500/1AFMfrIQhDOitgDFzcNANQFt9lt.jpg",cat:"series"},
+{title:"Vikings Valhalla",img:"https://image.tmdb.org/t/p/w500/2Ra0vfe5BqN2aPCpb0r3xGDq09t.jpg",cat:"series"},
+{title:"Barbarians",img:"https://image.tmdb.org/t/p/w500/kwV9NNDY1zgxVk0qP18SdvWE9WB.jpg",cat:"series"},
+{title:"Barbarians S2",img:"https://image.tmdb.org/t/p/w500/kwV9NNDY1zgxVk0qP18SdvWE9WB.jpg",cat:"series"},
+{title:"All American",img:"https://image.tmdb.org/t/p/w500/uGO0dwf8Rz3R4c8HwXo6omXx2R.jpg",cat:"series"},
+{title:"Outer Banks",img:"https://image.tmdb.org/t/p/w500/3rmUCv1vCQ4Vq1aVk0iTtuXQORz.jpg",cat:"series"},
+{title:"Elite",img:"https://image.tmdb.org/t/p/w500/fz37PxyIAQ2Xnv6Kg6yZXVFiVBb.jpg",cat:"series"},
+{title:"Elite S6",img:"https://image.tmdb.org/t/p/w500/fz37PxyIAQ2Xnv6Kg6yZXVFiVBb.jpg",cat:"series"},
+{title:"Sex Education",img:"https://image.tmdb.org/t/p/w500/6hOer2s0YQfZ0htjZg
