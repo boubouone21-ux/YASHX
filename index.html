@@ -5,45 +5,141 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YASHX</title>
 <style>
-body{margin:0;background:#000;color:#fff;font-family:Arial}
-.header{color:#e50914;font-size:28px;font-weight:bold;padding:15px}
-.hero{height:60vh;background:url('https://image.tmdb.org/t/p/original/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg') center/cover;position:relative}
-.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:100px;background:linear-gradient(transparent,#000)}
-.hero-content{position:absolute;bottom:20px;left:15px}
-.tag{color:#e50914;font-size:14px}
-h1{font-size:40px;margin:5px 0}
-.meta{font-size:14px;color:#ccc}
-.stars{color:#ffa500;margin:5px 0}
-.btn{padding:10px 25px;border:none;border-radius:4px;font-weight:bold;margin:10px 5px 0 0}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif}
+body{background:#000;color:#fff;padding-bottom:70px}
+.hero{height:70vh;background:url('https://image.tmdb.org/t/p/original/8I37NtDffNV7AZlDa7uDvvqhovU.jpg') center/cover;position:relative}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent, #000)}
+.hero-content{position:absolute;bottom:20px;left:15px;right:15px;z-index:2}
+.badge{color:#e50914;font-size:12px;font-weight:bold;margin-bottom:5px}
+h1{font-size:40px;margin-bottom:5px}
+.info{font-size:13px;color:#ccc;margin-bottom:8px}
+.stars{color:#ffa500;font-size:14px;margin-bottom:15px}
+.btns{display:flex;gap:10px}
+button{padding:10px 20px;border:none;border-radius:5px;font-weight:bold;font-size:15px}
 .btn-play{background:#fff;color:#000}
-.btn-list{background:rgba(109,109,110,0.7);color:#fff}
+.btn-list{background:rgba(109,109,110,.7);color:#fff}
 .menu{display:flex;gap:10px;padding:15px;overflow:auto}
-.menu button{background:#333;color:#fff;border:none;padding:8px 15px;border-radius:20px}
-.active{background:#e50914!important}
-.bottom-nav{position:fixed;bottom:0;width:100%;background:#111;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #333}
-.nav-item{text-align:center;font-size:12px;color:#666}
-.nav-item.active{color:#fff}
+.menu button{background:#333;color:#fff;border-radius:20px;padding:8px 15px;font-size:14px}
+.menu button.active{background:#e50914}
+.section{padding:15px}
+.section h2{font-size:20px;margin-bottom:10px}
+.row{display:flex;gap:10px;overflow:auto;padding:10px 0}
+.card{min-width:120px}
+.card img{width:120px;border-radius:8px}
+.card p{font-size:12px;margin-top:5px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#111;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #222}
+.nav-item{text-align:center;font-size:11px;color:#666}
+.nav-item.active{color:#e50914}
+.nav-icon{font-size:22px;display:block}
 </style>
 </head>
 <body>
-<div class="header">YASHX</div>
-<div class="hero"><div class="hero-content">
-<div class="tag">N°1 EN FRANCE</div>
+
+<div class="hero">
+<div class="hero-content">
+<div class="badge">N°1 EN FRANCE</div>
 <h1>Oppenheimer</h1>
-<div class="meta">2023 • 3h • Drame historique</div>
-<div class="stars">★★★ 4.8/5</div>
-<button class="btn btn-play">▶ Regarder</button>
-<button class="btn btn-list">+ Ma liste</button>
-</div></div>
+<div class="info">2023 • 3h • Drame historique</div>
+<div class="stars">★★ 4.8/5</div>
+<div class="btns">
+<button class="btn-play" onclick="playVideo()">▶ Regarder</button>
+<button class="btn-list" onclick="addList()">+ Ma liste</button>
+</div>
+</div>
+</div>
+
 <div class="menu">
-<button class="active">Tendance</button>
-<button>Films</button><button>Séries</button><button>Animés</button>
+<button class="active" onclick="filterCat('all', this)">Tendance</button>
+<button onclick="filterCat('film', this)">Films</button>
+<button onclick="filterCat('serie', this)">Séries</button>
+<button onclick="filterCat('anime', this)">Animés</button>
 </div>
+
+<!-- 20 FILMS -->
+<div class="section">
+<h2>🔥 Films Blockbusters</h2>
+<div class="row">
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"><p>Oppenheimer</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/1E5baAaEse26fej7uHcjJRR34sE.jpg"><p>Dune 2</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/kDp1vUBnMpe8aNB6mYbq4MGL4z9.jpg"><p>Deadpool 3</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/rLb2cwF3Pazuxaj0sRXQ037tGI1.jpg"><p>Furiosa</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg"><p>Bad Boys 4</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/wwemzKWzjKYJFfCeiB57q3r4Bcm.jpg"><p>Avengers</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/d5NXSklXo0qyIYkgV94XAgMIckC.jpg"><p>Dune 1</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/lyQBXzOQSuE59IsHyhrpSkh0Bu.jpg"><p>Interstellar</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/qJ2tW6WMUDux911r6m7haRef0WH.jpg"><p>The Dark Knight</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/6DrHO1jr3qjVsNIGAGLY5eHAm5I.jpg"><p>Gladiator 2</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"><p>John Wick 4</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg"><p>Venom 3</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/uUiIGztXVFc5p7tWwwRu9oNnfE9.jpg"><p>Mission Impossible</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/2CAL2433ZeIihfX1Hb2139CX0pW.jpg"><p>Avatar 2</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/tMefBSflR6PGbA5WxwZbAIuJCqA.jpg"><p>Barbie</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/hdFNh3DQ6kA5m3dkB7g1qiO4Aib.jpg"><p>Killers Moon</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/2cxhvwyEwRhy9lENeGClhdgNwmR.jpg"><p>Fast X</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/6x9WS8YdsPF9Ayt2bOeEOG8EJJ7.jpg"><p>Batman</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/rjkmN1dniUHwjlJzGsWzg1R6PbR.jpg"><p>Spider-Man</p></div>
+<div class="card" data-cat="film"><img src="https://image.tmdb.org/t/p/w300/gOnmaxHo0QC6p4ST9X8FtfeGkbd.jpg"><p>Top Gun</p></div>
+</div>
+</div>
+
+<!-- 15 SÉRIES -->
+<div class="section">
+<h2>📺 Séries Binge-Watching</h2>
+<div class="row">
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/1X4cs7Gjx3A3X49rKtAUvV3nVcf.jpg"><p>Breaking Bad</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/49WJfeN0edf8NOI6WMIlVDoCaWT.jpg"><p>La Casa de Papel</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><p>Peaky Blinders</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/9Uzzk7kNmi0Ei6feEsiRTtr3Tng.jpg"><p>Squid Game</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/mWSBsLW6HtzgOX7OoL6bz0rVjWb.jpg"><p>Mercredi</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/7QtHh0n4eQdcvLrVAHhAmV7aCd3.jpg"><p>The 100</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/cva3CG7aUmfc7paD1SaRs7KnRiz.jpg"><p>Dark</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/mBYqfRhbwtEYsZYSRh6iZRXtXbd.jpg"><p>Prison Break</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg"><p>Stranger Things</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/1mQNFSpj9bF3M6QHya7tTLg70pP.jpg"><p>Money Heist</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/6JDpfsUvg0A5j9eaB4QoZ7rOh7n.jpg"><p>All American</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/9gy4Iuax33x7ad9f3VwInhWQ3IQ.jpg"><p>Vikings</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/9PFonBhyj1RFJNHaOzzJhn6BzLx.jpg"><p>Game of Thrones</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/rYmtjz5WWgmIgPj1o6IWAFEs5hM.jpg"><p>The Witcher</p></div>
+<div class="card" data-cat="serie"><img src="https://image.tmdb.org/t/p/w300/4hOAKl3lZ9W5SKYt3DrtqMLth2Q.jpg"><p>Suits</p></div>
+</div>
+</div>
+
+<!-- ANIMÉS -->
+<div class="section">
+<h2>🔥 Animés</h2>
+<div class="row">
+<div class="card" data-cat="anime"><img src="https://image.tmdb.org/t/p/w300/6Wdl9N6dL0Hi0T1qIDd2tAqLAEK.jpg"><p>One Piece</p></div>
+<div class="card" data-cat="anime"><img src="https://image.tmdb.org/t/p/w300/9pHxvHQq5hsqn9uVao7fjU7g9vt.jpg"><p>Demon Slayer</p></div>
+<div class="card" data-cat="anime"><img src="https://image.tmdb.org/t/p/w300/gI7yZ9ZO5NUQhCWJ8m7rNJkKAF.jpg"><p>Attack Titan</p></div>
+<div class="card" data-cat="anime"><img src="https://image.tmdb.org/t/p/w300/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"><p>Naruto</p></div>
+<div class="card" data-cat="anime"><img src="https://image.tmdb.org/t/p/w300/mxKvdOvUNiN9pyhVtiN8TpF3EAb.jpg"><p>Dragon Ball</p></div>
+</div>
+</div>
+
 <div class="bottom-nav">
-<div class="nav-item active"><div>Y</div>Accueil</div>
-<div class="nav-item"><div>🔍</div>Recherche</div>
-<div class="nav-item"><div>📁</div>Ma liste</div>
-<div class="nav-item"><div>👤</div>Mon YASHX</div>
+<div class="nav-item active" onclick="goNav(this)"><span class="nav-icon">Y</span>Accueil</div>
+<div class="nav-item" onclick="goNav(this)"><span class="nav-icon">🔍</span>Recherche</div>
+<div class="nav-item" onclick="goNav(this)"><span class="nav-icon">📁</span>Ma liste</div>
+<div class="nav-item" onclick="goNav(this)"><span class="nav-icon">👤</span>Mon YASHX</div>
 </div>
+
+<script>
+function playVideo() {alert('🎬 Lecture... Bientôt disponible Chef!')}
+function addList() {alert('✅ Ajouté à Ma liste!')}
+function filterCat(cat, btn) {
+  document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.card').forEach(card => {
+    if(cat === 'all' || card.dataset.cat === cat) card.style.display = 'block';
+    else card.style.display = 'none';
+  });
+}
+function goNav(nav) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  nav.classList.add('active');
+  alert('👉 ' + nav.textContent.trim() + ' - Page complète bientôt!');
+}
+</script>
+
 </body>
 </html>
