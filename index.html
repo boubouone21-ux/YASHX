@@ -3,78 +3,208 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YASHX - Streaming Illimité</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>YASHX - Streaming</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #141414;
+      color: white;
+      overflow-x: hidden;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 15px 40px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+    }
+    .logo {
+      font-size: 32px;
+      font-weight: bold;
+      color: #e50914;
+      margin-right: 40px;
+    }
+    nav a {
+      color: white;
+      margin: 0 18px;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    nav a:hover, nav a.active { color: #e50914; }
+
+    .hero {
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 40px 120px;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      background: linear-gradient(transparent, #141414);
+    }
+    .hero-content {
+      max-width: 600px;
+      z-index: 2;
+    }
+    .hero h1 {
+      font-size: 68px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.9);
+    }
+    .hero p {
+      font-size: 22px;
+      margin-bottom: 25px;
+    }
+    .play-btn {
+      background: white;
+      color: black;
+      padding: 12px 32px;
+      font-size: 18px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 15px;
+    }
+    .more-btn {
+      background: rgba(109,109,110,0.7);
+      color: white;
+      padding: 12px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .row {
+      padding: 20px 40px;
+      position: relative;
+    }
+    .row h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+    .content-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 10px 0;
+      scrollbar-width: none;
+    }
+    .content-row::-webkit-scrollbar { display: none; }
+    
+    .poster {
+      width: 220px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 6px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .poster:hover {
+      transform: scale(1.25);
+      z-index: 10;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
+
   <!-- HEADER -->
   <header>
-    <nav class="navbar">
-      <div class="logo">YASHX</div>
-      <div class="nav-links">
-        <a href="#">Accueil</a>
-        <a href="#">Séries</a>
-        <a href="#">Films</a>
-        <a href="#">Nouveautés</a>
-        <a href="#">Ma Liste</a>
-      </div>
-      <div class="right-side">
-        <i class="fas fa-search"></i>
-        <i class="fas fa-bell"></i>
-        <div class="profile">👤</div>
-      </div>
+    <div class="logo">YASHX</div>
+    <nav>
+      <a href="#" class="active">Accueil</a>
+      <a href="#">Séries</a>
+      <a href="#">Films</a>
+      <a href="#">Bollywood</a>
+      <a href="#">K-Dramas</a>
+      <a href="#">Action</a>
     </nav>
+    <div style="margin-left:auto; display:flex; align-items:center; gap:20px;">
+      <input type="text" placeholder="Rechercher..." style="background:#333; border:none; padding:8px 15px; border-radius:4px; color:white; width:250px;">
+      <div>👤</div>
+    </div>
   </header>
 
-  <!-- HERO BANNER -->
-  <section class="hero" style="background-image: url('https://via.placeholder.com/1920x1080?text=The+Revenge+Dhurandhar');">
+  <!-- HERO -->
+  <section class="hero" style="background-image: url('https://picsum.photos/id/1015/1920/1080');">
     <div class="hero-content">
-      <h1 class="title">THE REVENGE<br>DHURANDHAR</h1>
-      <p class="subtitle">RAW & UNDEKHHA - Version Internationale Non Censurée</p>
-      <p class="genres">Bollywood • Crime • Action • Aventure</p>
-      <div class="buttons">
-        <button class="btn play"><i class="fas fa-play"></i> Lecture</button>
-        <button class="btn mylist"><i class="fas fa-plus"></i> Ma Liste</button>
+      <h1>THE REVENGE<br>DHURANDHAR</h1>
+      <p>Raw & Undekha - Version Internationale Non Censurée</p>
+      <div>
+        <button class="play-btn">▶ Lecture</button>
+        <button class="more-btn">Plus d'infos</button>
       </div>
     </div>
   </section>
 
   <!-- CONTENU -->
-  <main>
-    <section class="row">
-      <h2>Sports TV Shows</h2>
-      <div class="carousel">
-        <!-- Ajoute tes posters ici -->
-        <img src="https://via.placeholder.com/300x170?text=Clash+in+Italy" alt="">
-        <img src="https://via.placeholder.com/300x170?text=Brazil+70" alt="">
-        <img src="https://via.placeholder.com/300x170?text=Spinning+Out" alt="">
-      </div>
-    </section>
+  <div class="row">
+    <h2>🔥 Top 10 sur YASHX Aujourd'hui</h2>
+    <div class="content-row" id="top10"></div>
+  </div>
 
-    <section class="row">
-      <h2>K-Dramas</h2>
-      <div class="carousel">
-        <img src="https://via.placeholder.com/300x170?text=The+Wonder+Foools" alt="">
-        <img src="https://via.placeholder.com/300x170?text=All+Of+Us+Are+Dead" alt="">
-        <img src="https://via.placeholder.com/300x170?text=Bloodhounds" alt="">
-      </div>
-    </section>
+  <div class="row">
+    <h2>Bollywood Action & Adventure</h2>
+    <div class="content-row" id="bollywood"></div>
+  </div>
 
-    <section class="row">
-      <h2>Top 10 Aujourd'hui sur YASHX</h2>
-      <div class="carousel">
-        <!-- Tes posters -->
-      </div>
-    </section>
+  <div class="row">
+    <h2>K-Dramas</h2>
+    <div class="content-row" id="kdramas"></div>
+  </div>
 
-    <!-- Ajoute d'autres sections : International, Literary Sagas, etc. -->
-  </main>
+  <div class="row">
+    <h2>International TV Dramas</h2>
+    <div class="content-row" id="international"></div>
+  </div>
 
   <footer>
-    <p>YASHX © 2026 - Clone Netflix-like • Pour démo uniquement</p>
+    <p>YASHX Streaming © 2026 - Clone Netflix fait avec ❤️</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Données exemple
+    const posters = [
+      "https://picsum.photos/id/1015/220/130", "https://picsum.photos/id/201/220/130",
+      "https://picsum.photos/id/237/220/130", "https://picsum.photos/id/180/220/130",
+      "https://picsum.photos/id/251/220/130", "https://picsum.photos/id/133/220/130",
+      "https://picsum.photos/id/201/220/130", "https://picsum.photos/id/133/220/130"
+    ];
+
+    function createRow(containerId) {
+      const container = document.getElementById(containerId);
+      posters.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'poster';
+        img.onclick = () => alert("Lecture du contenu en cours de développement 🔥");
+        container.appendChild(img);
+      });
+    }
+
+    createRow('top10');
+    createRow('bollywood');
+    createRow('kdramas');
+    createRow('international');
+  </script>
 </body>
 </html>
