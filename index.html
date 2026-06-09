@@ -51,7 +51,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 40%;
+      height: 50%;
       background: linear-gradient(transparent, #141414);
     }
     .hero-content {
@@ -120,14 +120,14 @@
 
     footer {
       text-align: center;
-      padding: 30px;
+      padding: 40px;
       color: #777;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="logo">YASHX</div>
     <nav>
@@ -136,19 +136,17 @@
       <a href="#">Films</a>
       <a href="#">Bollywood</a>
       <a href="#">K-Dramas</a>
-      <a href="#">Action</a>
     </nav>
     <div style="margin-left:auto; display:flex; align-items:center; gap:20px;">
       <input type="text" placeholder="Rechercher..." style="background:#333; border:none; padding:8px 15px; border-radius:4px; color:white; width:250px;">
-      <div>👤</div>
+      <div style="font-size:24px;">👤</div>
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero" style="background-image: url('https://picsum.photos/id/1015/1920/1080');">
     <div class="hero-content">
       <h1>THE REVENGE<br>DHURANDHAR</h1>
-      <p>Raw & Undekha - Version Internationale Non Censurée</p>
+      <p>Raw & Undekha - Version Internationale</p>
       <div>
         <button class="play-btn">▶ Lecture</button>
         <button class="more-btn">Plus d'infos</button>
@@ -156,14 +154,13 @@
     </div>
   </section>
 
-  <!-- CONTENU -->
   <div class="row">
     <h2>🔥 Top 10 sur YASHX Aujourd'hui</h2>
     <div class="content-row" id="top10"></div>
   </div>
 
   <div class="row">
-    <h2>Bollywood Action & Adventure</h2>
+    <h2>Bollywood Action</h2>
     <div class="content-row" id="bollywood"></div>
   </div>
 
@@ -173,7 +170,7 @@
   </div>
 
   <div class="row">
-    <h2>International TV Dramas</h2>
+    <h2>International Dramas</h2>
     <div class="content-row" id="international"></div>
   </div>
 
@@ -182,21 +179,19 @@
   </footer>
 
   <script>
-    // Données exemple
     const posters = [
-      "https://picsum.photos/id/1015/220/130", "https://picsum.photos/id/201/220/130",
-      "https://picsum.photos/id/237/220/130", "https://picsum.photos/id/180/220/130",
-      "https://picsum.photos/id/251/220/130", "https://picsum.photos/id/133/220/130",
-      "https://picsum.photos/id/201/220/130", "https://picsum.photos/id/133/220/130"
+      "https://picsum.photos/id/1015/220/130", "https://picsum.photos/id/237/220/130",
+      "https://picsum.photos/id/251/220/130", "https://picsum.photos/id/201/220/130",
+      "https://picsum.photos/id/133/220/130", "https://picsum.photos/id/180/220/130"
     ];
 
-    function createRow(containerId) {
-      const container = document.getElementById(containerId);
+    function createRow(id) {
+      const container = document.getElementById(id);
       posters.forEach(src => {
         const img = document.createElement('img');
         img.src = src;
         img.className = 'poster';
-        img.onclick = () => alert("Lecture du contenu en cours de développement 🔥");
+        img.onclick = () => alert("🎥 Lecture en cours de développement sur YASHX !");
         container.appendChild(img);
       });
     }
