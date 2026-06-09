@@ -6,124 +6,54 @@
   <title>YASHX - Streaming</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Arial', sans-serif;
-      background: #141414;
-      color: white;
-      overflow-x: hidden;
-    }
+    body { font-family: Arial, sans-serif; background: #141414; color: white; overflow-x: hidden; }
     header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 15px 40px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-      display: flex;
-      align-items: center;
-      z-index: 1000;
+      position: fixed; top: 0; width: 100%; padding: 15px 40px; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+      display: flex; align-items: center; z-index: 1000;
     }
-    .logo {
-      font-size: 32px;
-      font-weight: bold;
-      color: #e50914;
-      margin-right: 40px;
-    }
-    nav a {
-      color: white;
-      margin: 0 18px;
-      text-decoration: none;
-      font-size: 15px;
-    }
+    .logo { font-size: 32px; font-weight: bold; color: #e50914; margin-right: 40px; }
+    nav a { color: white; margin: 0 18px; text-decoration: none; font-size: 15px; }
     nav a:hover, nav a.active { color: #e50914; }
 
     .hero {
-      height: 100vh;
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: flex-end;
-      padding: 0 40px 120px;
-      position: relative;
+      height: 100vh; background-size: cover; background-position: center; display: flex; align-items: flex-end;
+      padding: 0 40px 120px; position: relative;
     }
     .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
+      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
       background: linear-gradient(transparent, #141414);
     }
-    .hero-content {
-      max-width: 600px;
-      z-index: 2;
+    .hero-content { max-width: 600px; z-index: 2; }
+    .hero h1 { font-size: 68px; margin-bottom: 15px; text-shadow: 2px 2px 10px rgba(0,0,0,0.9); }
+    .hero p { font-size: 22px; margin-bottom: 25px; }
+    .play-btn, .more-btn {
+      padding: 12px 32px; font-size: 18px; border: none; border-radius: 4px; cursor: pointer; margin-right: 15px;
     }
-    .hero h1 {
-      font-size: 68px;
-      margin-bottom: 15px;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.9);
-    }
-    .hero p {
-      font-size: 22px;
-      margin-bottom: 25px;
-    }
-    .play-btn {
-      background: white;
-      color: black;
-      padding: 12px 32px;
-      font-size: 18px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-right: 15px;
-    }
-    .more-btn {
-      background: rgba(109,109,110,0.7);
-      color: white;
-      padding: 12px 28px;
-      font-size: 18px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+    .play-btn { background: white; color: black; }
+    .more-btn { background: rgba(109,109,110,0.7); color: white; }
 
-    .row {
-      padding: 20px 40px;
-      position: relative;
-    }
-    .row h2 {
-      margin-bottom: 15px;
-      font-size: 22px;
-    }
+    .row { padding: 20px 40px; position: relative; }
+    .row h2 { margin-bottom: 15px; font-size: 22px; }
     .content-row {
-      display: flex;
-      overflow-x: auto;
-      gap: 8px;
-      padding: 10px 0;
-      scrollbar-width: none;
+      display: flex; overflow-x: auto; gap: 10px; padding: 10px 0; scrollbar-width: none;
     }
     .content-row::-webkit-scrollbar { display: none; }
-    
     .poster {
-      width: 220px;
-      height: 130px;
-      object-fit: cover;
-      border-radius: 6px;
-      transition: all 0.3s;
-      cursor: pointer;
+      width: 220px; height: 130px; object-fit: cover; border-radius: 6px;
+      transition: all 0.3s; cursor: pointer;
     }
-    .poster:hover {
-      transform: scale(1.25);
-      z-index: 10;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.8);
-    }
+    .poster:hover { transform: scale(1.25); z-index: 10; box-shadow: 0 10px 20px rgba(0,0,0,0.8); }
 
-    footer {
-      text-align: center;
-      padding: 40px;
-      color: #777;
-      font-size: 14px;
+    #videoModal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center;
     }
+    .video-container { width: 90%; max-width: 1200px; position: relative; }
+    video { width: 100%; border-radius: 8px; }
+    .close-btn {
+      position: absolute; top: -50px; right: 20px; font-size: 40px; color: white; cursor: pointer;
+    }
+    footer { text-align: center; padding: 40px; color: #777; }
   </style>
 </head>
 <body>
@@ -137,10 +67,6 @@
       <a href="#">Bollywood</a>
       <a href="#">K-Dramas</a>
     </nav>
-    <div style="margin-left:auto; display:flex; align-items:center; gap:20px;">
-      <input type="text" placeholder="Rechercher..." style="background:#333; border:none; padding:8px 15px; border-radius:4px; color:white; width:250px;">
-      <div style="font-size:24px;">👤</div>
-    </div>
   </header>
 
   <section class="hero" style="background-image: url('https://picsum.photos/id/1015/1920/1080');">
@@ -148,41 +74,34 @@
       <h1>THE REVENGE<br>DHURANDHAR</h1>
       <p>Raw & Undekha - Version Internationale</p>
       <div>
-        <button class="play-btn">▶ Lecture</button>
+        <button class="play-btn" onclick="playVideo('https://test-streams.mux.dev/x264_720p_1500kbps_30fps.mp4')">▶ Lecture</button>
         <button class="more-btn">Plus d'infos</button>
       </div>
     </div>
   </section>
 
-  <div class="row">
-    <h2>🔥 Top 10 sur YASHX Aujourd'hui</h2>
-    <div class="content-row" id="top10"></div>
+  <div class="row"><h2>🔥 Top 10 sur YASHX Aujourd'hui</h2><div class="content-row" id="top10"></div></div>
+  <div class="row"><h2>Bollywood Action & Adventure</h2><div class="content-row" id="bollywood"></div></div>
+  <div class="row"><h2>K-Dramas</h2><div class="content-row" id="kdramas"></div></div>
+  <div class="row"><h2>International TV Dramas</h2><div class="content-row" id="international"></div></div>
+  <div class="row"><h2>Thrillers & Crime</h2><div class="content-row" id="thrillers"></div></div>
+
+  <!-- Lecteur Vidéo -->
+  <div id="videoModal">
+    <div class="video-container">
+      <span class="close-btn" onclick="closeVideo()">×</span>
+      <video id="mainVideo" controls autoplay></video>
+    </div>
   </div>
 
-  <div class="row">
-    <h2>Bollywood Action</h2>
-    <div class="content-row" id="bollywood"></div>
-  </div>
-
-  <div class="row">
-    <h2>K-Dramas</h2>
-    <div class="content-row" id="kdramas"></div>
-  </div>
-
-  <div class="row">
-    <h2>International Dramas</h2>
-    <div class="content-row" id="international"></div>
-  </div>
-
-  <footer>
-    <p>YASHX Streaming © 2026 - Clone Netflix fait avec ❤️</p>
-  </footer>
+  <footer><p>YASHX Streaming © 2026</p></footer>
 
   <script>
     const posters = [
       "https://picsum.photos/id/1015/220/130", "https://picsum.photos/id/237/220/130",
       "https://picsum.photos/id/251/220/130", "https://picsum.photos/id/201/220/130",
-      "https://picsum.photos/id/133/220/130", "https://picsum.photos/id/180/220/130"
+      "https://picsum.photos/id/133/220/130", "https://picsum.photos/id/180/220/130",
+      "https://picsum.photos/id/1015/220/130", "https://picsum.photos/id/237/220/130"
     ];
 
     function createRow(id) {
@@ -191,15 +110,29 @@
         const img = document.createElement('img');
         img.src = src;
         img.className = 'poster';
-        img.onclick = () => alert("🎥 Lecture en cours de développement sur YASHX !");
+        img.onclick = () => playVideo('https://test-streams.mux.dev/x264_720p_1500kbps_30fps.mp4');
         container.appendChild(img);
       });
     }
 
+    function playVideo(url) {
+      document.getElementById('mainVideo').src = url;
+      document.getElementById('videoModal').style.display = 'flex';
+    }
+    function closeVideo() {
+      const video = document.getElementById('mainVideo');
+      video.pause(); video.src = '';
+      document.getElementById('videoModal').style.display = 'none';
+    }
+
+    // Création des lignes
     createRow('top10');
     createRow('bollywood');
     createRow('kdramas');
     createRow('international');
+    createRow('thrillers');
+
+    document.addEventListener('keydown', e => { if (e.key === "Escape") closeVideo(); });
   </script>
 </body>
 </html>
