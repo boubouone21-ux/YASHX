@@ -1,138 +1,294 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YASHX - Streaming</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background: #141414; color: white; overflow-x: hidden; }
-    header {
-      position: fixed; top: 0; width: 100%; padding: 15px 40px; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-      display: flex; align-items: center; z-index: 1000;
-    }
-    .logo { font-size: 32px; font-weight: bold; color: #e50914; margin-right: 40px; }
-    nav a { color: white; margin: 0 18px; text-decoration: none; font-size: 15px; }
-    nav a:hover, nav a.active { color: #e50914; }
-
-    .hero {
-      height: 100vh; background-size: cover; background-position: center; display: flex; align-items: flex-end;
-      padding: 0 40px 120px; position: relative;
-    }
-    .hero::after {
-      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
-      background: linear-gradient(transparent, #141414);
-    }
-    .hero-content { max-width: 600px; z-index: 2; }
-    .hero h1 { font-size: 68px; margin-bottom: 15px; text-shadow: 2px 2px 10px rgba(0,0,0,0.9); }
-    .hero p { font-size: 22px; margin-bottom: 25px; }
-    .play-btn, .more-btn {
-      padding: 12px 32px; font-size: 18px; border: none; border-radius: 4px; cursor: pointer; margin-right: 15px;
-    }
-    .play-btn { background: white; color: black; }
-    .more-btn { background: rgba(109,109,110,0.7); color: white; }
-
-    .row { padding: 20px 40px; position: relative; }
-    .row h2 { margin-bottom: 15px; font-size: 22px; }
-    .content-row {
-      display: flex; overflow-x: auto; gap: 10px; padding: 10px 0; scrollbar-width: none;
-    }
-    .content-row::-webkit-scrollbar { display: none; }
-    .poster {
-      width: 220px; height: 130px; object-fit: cover; border-radius: 6px;
-      transition: all 0.3s; cursor: pointer;
-    }
-    .poster:hover { transform: scale(1.25); z-index: 10; box-shadow: 0 10px 20px rgba(0,0,0,0.8); }
-
-    #videoModal {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center;
-    }
-    .video-container { width: 90%; max-width: 1200px; position: relative; }
-    video { width: 100%; border-radius: 8px; }
-    .close-btn {
-      position: absolute; top: -50px; right: 20px; font-size: 40px; color: white; cursor: pointer;
-    }
-    footer { text-align: center; padding: 40px; color: #777; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YASHX - Streaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Netflix+Sans:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Netflix Sans', system-ui, sans-serif;
+        }
+        
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('https://picsum.photos/id/1015/1920/1080');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .poster {
+            transition: all 0.3s ease;
+        }
+        
+        .poster:hover {
+            transform: scale(1.08);
+            z-index: 10;
+        }
+        
+        .scroll-container {
+            scrollbar-width: none;
+        }
+        
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .nav-active {
+            color: white;
+            border-bottom: 3px solid #e50914;
+        }
+    </style>
 </head>
-<body>
-
-  <header>
-    <div class="logo">YASHX</div>
-    <nav>
-      <a href="#" class="active">Accueil</a>
-      <a href="#">Séries</a>
-      <a href="#">Films</a>
-      <a href="#">Bollywood</a>
-      <a href="#">K-Dramas</a>
+<body class="bg-black text-white">
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-md z-50">
+        <div class="max-w-screen-2xl mx-auto px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <!-- Logo -->
+                <div onclick="window.location.reload()" class="flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 bg-red-600 rounded flex items-center justify-center text-3xl font-bold">Y</div>
+                    <span class="text-3xl font-bold tracking-tighter">YASHX</span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                    <a href="#" class="nav-active px-4 py-2">Accueil</a>
+                    <a href="#" class="hover:text-gray-300 px-4 py-2">Séries</a>
+                    <a href="#" class="hover:text-gray-300 px-4 py-2">Films</a>
+                    <a href="#" class="hover:text-gray-300 px-4 py-2">Nouveautés</a>
+                    <a href="#" class="hover:text-gray-300 px-4 py-2">Ma Liste</a>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <input type="text" id="searchInput" 
+                           class="bg-zinc-900 text-sm border border-zinc-700 rounded-full pl-10 py-2 w-72 focus:outline-none focus:border-red-600"
+                           placeholder="Rechercher films, séries...">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-3 text-gray-400"></i>
+                </div>
+                <div class="w-8 h-8 bg-zinc-700 rounded-full flex items-center justify-center cursor-pointer hover:bg-zinc-600">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded"></div>
+                    <span class="text-sm font-medium">Yash</span>
+                </div>
+            </div>
+        </div>
     </nav>
-  </header>
 
-  <section class="hero" style="background-image: url('https://picsum.photos/id/1015/1920/1080');">
-    <div class="hero-content">
-      <h1>THE REVENGE<br>DHURANDHAR</h1>
-      <p>Raw & Undekha - Version Internationale</p>
-      <div>
-        <button class="play-btn" onclick="playVideo('https://test-streams.mux.dev/x264_720p_1500kbps_30fps.mp4')">▶ Lecture</button>
-        <button class="more-btn">Plus d'infos</button>
-      </div>
+    <!-- Hero Banner -->
+    <div class="hero-bg h-screen pt-20 flex items-center relative">
+        <div class="max-w-screen-2xl mx-auto px-8 z-10">
+            <div class="max-w-md">
+                <h1 class="text-6xl font-bold mb-4 leading-none">THE REVENGE<br>DHURANDHAR</h1>
+                <p class="text-xl mb-2 text-red-500 font-semibold">RAW & UNDEKHHA • UNCENSORED</p>
+                <p class="text-lg mb-6">Un guerrier vengeur dans un monde en flammes. Action, drame et adrénaline pure.</p>
+                
+                <div class="flex gap-4">
+                    <button onclick="playVideo()" 
+                            class="flex items-center gap-3 bg-white text-black px-8 py-4 rounded hover:bg-gray-200 font-semibold text-lg">
+                        <i class="fa-solid fa-play"></i>
+                        LECTURE
+                    </button>
+                    <button onclick="addToMyList()"
+                            class="flex items-center gap-3 bg-white/30 hover:bg-white/40 px-8 py-4 rounded font-semibold text-lg">
+                        <i class="fa-solid fa-plus"></i>
+                        MA LISTE
+                    </button>
+                </div>
+                
+                <div class="mt-8 flex gap-6 text-sm">
+                    <div>Bollywood</div>
+                    <div>Action • Crime • Aventure</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 right-10 flex gap-3">
+            <div class="bg-black/70 px-5 py-2 rounded text-sm flex items-center gap-2">
+                <span class="text-green-400">98% Match</span>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <div class="row"><h2>🔥 Top 10 sur YASHX Aujourd'hui</h2><div class="content-row" id="top10"></div></div>
-  <div class="row"><h2>Bollywood Action & Adventure</h2><div class="content-row" id="bollywood"></div></div>
-  <div class="row"><h2>K-Dramas</h2><div class="content-row" id="kdramas"></div></div>
-  <div class="row"><h2>International TV Dramas</h2><div class="content-row" id="international"></div></div>
-  <div class="row"><h2>Thrillers & Crime</h2><div class="content-row" id="thrillers"></div></div>
+    <!-- Content Sections -->
+    <div class="max-w-screen-2xl mx-auto px-8 -mt-20 relative z-20 space-y-12 pb-20">
+        
+        <!-- Top 10 -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4 flex items-center gap-3">
+                <span class="text-red-600">🔥</span> Top 10 Aujourd'hui sur YASHX
+            </h2>
+            <div class="flex gap-4 overflow-x-auto scroll-container pb-4">
+                <div class="min-w-[220px] relative poster cursor-pointer" onclick="showDetails('Teach You a Lesson')">
+                    <img src="https://picsum.photos/id/201/220/330" class="rounded-xl" alt="">
+                    <div class="absolute -top-1 -left-1 text-7xl font-black text-white/90 drop-shadow-2xl">1</div>
+                </div>
+                <div class="min-w-[220px] relative poster cursor-pointer" onclick="showDetails('Michael Jackson The Verdict')">
+                    <img src="https://picsum.photos/id/237/220/330" class="rounded-xl" alt="">
+                    <div class="absolute -top-1 -left-1 text-7xl font-black text-white/90 drop-shadow-2xl">2</div>
+                </div>
+                <div class="min-w-[220px] relative poster cursor-pointer" onclick="showDetails('Kuroko Basketball')">
+                    <img src="https://picsum.photos/id/180/220/330" class="rounded-xl" alt="">
+                    <div class="absolute -top-1 -left-1 text-7xl font-black text-white/90 drop-shadow-2xl">3</div>
+                </div>
+            </div>
+        </div>
 
-  <!-- Lecteur Vidéo -->
-  <div id="videoModal">
-    <div class="video-container">
-      <span class="close-btn" onclick="closeVideo()">×</span>
-      <video id="mainVideo" controls autoplay></video>
+        <!-- Bollywood & Action -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">Bollywood Action</h2>
+            <div class="flex gap-4 overflow-x-auto scroll-container pb-4">
+                <img onclick="showDetails('Dhurandhar')" src="https://picsum.photos/id/1015/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+                <img onclick="showDetails('Dangal')" src="https://picsum.photos/id/133/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+                <img onclick="showDetails('Sully')" src="https://picsum.photos/id/201/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+                <img onclick="showDetails('Gran Turismo')" src="https://picsum.photos/id/180/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+            </div>
+        </div>
+
+        <!-- K-Dramas -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">K-Dramas Populaire</h2>
+            <div class="flex gap-4 overflow-x-auto scroll-container pb-4">
+                <img onclick="showDetails('All of Us Are Dead')" src="https://picsum.photos/id/251/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+                <img onclick="showDetails('Bloodhounds')" src="https://picsum.photos/id/274/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+                <img onclick="showDetails('Happiness')" src="https://picsum.photos/id/201/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+                <img onclick="showDetails('Trigger')" src="https://picsum.photos/id/133/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+            </div>
+        </div>
+
+        <!-- Sci-Fi & Fantasy -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">Sci-Fi & Fantasy</h2>
+            <div class="flex gap-4 overflow-x-auto scroll-container pb-4">
+                <img onclick="showDetails('Lord of the Rings')" src="https://picsum.photos/id/1016/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+                <img onclick="showDetails('Stranger Things')" src="https://picsum.photos/id/201/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+                <img onclick="showDetails('Lost in Space')" src="https://picsum.photos/id/180/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+                <img onclick="showDetails('Passengers')" src="https://picsum.photos/id/133/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+            </div>
+        </div>
+
+        <!-- Teen & Award Winning -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">Séries Teen & Primées</h2>
+            <div class="flex gap-4 overflow-x-auto scroll-container pb-4">
+                <img onclick="showDetails('Elite')" src="https://picsum.photos/id/237/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+                <img onclick="showDetails('Anne with an E')" src="https://picsum.photos/id/201/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+                <img onclick="showDetails('Wednesday')" src="https://picsum.photos/id/133/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
+            </div>
+        </div>
     </div>
-  </div>
 
-  <footer><p>YASHX Streaming © 2026</p></footer>
+    <!-- Footer / Bottom Nav -->
+    <div class="fixed bottom-0 left-0 right-0 bg-black border-t border-zinc-800 py-3">
+        <div class="max-w-screen-2xl mx-auto flex justify-around text-xs">
+            <div onclick="window.location.reload()" class="flex flex-col items-center text-red-600 cursor-pointer">
+                <i class="fa-solid fa-house text-2xl"></i>
+                <span class="mt-1">Accueil</span>
+            </div>
+            <div class="flex flex-col items-center text-gray-400 hover:text-white cursor-pointer">
+                <i class="fa-solid fa-tv text-2xl"></i>
+                <span class="mt-1">Séries</span>
+            </div>
+            <div class="flex flex-col items-center text-gray-400 hover:text-white cursor-pointer">
+                <i class="fa-solid fa-film text-2xl"></i>
+                <span class="mt-1">Films</span>
+            </div>
+            <div class="flex flex-col items-center text-gray-400 hover:text-white cursor-pointer">
+                <i class="fa-solid fa-list text-2xl"></i>
+                <span class="mt-1">Ma Liste</span>
+            </div>
+        </div>
+    </div>
 
-  <script>
-    const posters = [
-      "https://picsum.photos/id/1015/220/130", "https://picsum.photos/id/237/220/130",
-      "https://picsum.photos/id/251/220/130", "https://picsum.photos/id/201/220/130",
-      "https://picsum.photos/id/133/220/130", "https://picsum.photos/id/180/220/130",
-      "https://picsum.photos/id/1015/220/130", "https://picsum.photos/id/237/220/130"
-    ];
+    <!-- Modal -->
+    <div id="modal" class="hidden fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
+        <div class="max-w-2xl w-full mx-4 bg-zinc-900 rounded-2xl overflow-hidden">
+            <div id="modal-content" class="p-8">
+                <!-- Dynamic content -->
+            </div>
+            <div class="flex justify-end p-4 border-t border-zinc-700">
+                <button onclick="closeModal()" 
+                        class="px-8 py-3 bg-red-600 hover:bg-red-700 rounded font-medium">
+                    FERMER
+                </button>
+            </div>
+        </div>
+    </div>
 
-    function createRow(id) {
-      const container = document.getElementById(id);
-      posters.forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.className = 'poster';
-        img.onclick = () => playVideo('https://test-streams.mux.dev/x264_720p_1500kbps_30fps.mp4');
-        container.appendChild(img);
-      });
-    }
+    <script>
+        function playVideo() {
+            alert("🎬 Lecture du film en cours...\n\n(YASHX - Mode démo - Vidéo placeholder)");
+        }
 
-    function playVideo(url) {
-      document.getElementById('mainVideo').src = url;
-      document.getElementById('videoModal').style.display = 'flex';
-    }
-    function closeVideo() {
-      const video = document.getElementById('mainVideo');
-      video.pause(); video.src = '';
-      document.getElementById('videoModal').style.display = 'none';
-    }
+        function addToMyList() {
+            alert("✅ Ajouté à Ma Liste !");
+        }
 
-    // Création des lignes
-    createRow('top10');
-    createRow('bollywood');
-    createRow('kdramas');
-    createRow('international');
-    createRow('thrillers');
+        function showDetails(title) {
+            const modal = document.getElementById('modal');
+            const content = document.getElementById('modal-content');
+            
+            content.innerHTML = `
+                <div class="flex gap-8">
+                    <div class="w-52 flex-shrink-0">
+                        <img src="https://picsum.photos/id/1015/400/550" class="rounded-2xl shadow-2xl" alt="">
+                    </div>
+                    <div>
+                        <h1 class="text-4xl font-bold mb-2">${title}</h1>
+                        <div class="flex gap-4 text-sm mb-6">
+                            <span class="text-green-400">98% Match</span>
+                            <span>2025</span>
+                            <span class="bg-zinc-700 px-2 rounded">16+</span>
+                            <span>2h 18min</span>
+                        </div>
+                        <p class="text-lg leading-relaxed mb-8">
+                            Un chef-d'œuvre d'action et de drame. ${title} vous emmène dans un voyage intense rempli d'émotions et de scènes époustouflantes.
+                        </p>
+                        <div class="grid grid-cols-2 gap-8 text-sm">
+                            <div>
+                                <div class="text-gray-400">Genres</div>
+                                <div>Action • Drame • Thriller</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-400">Cast</div>
+                                <div>Aamir Khan, Ranbir Kapoor, etc.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
 
-    document.addEventListener('keydown', e => { if (e.key === "Escape") closeVideo(); });
-  </script>
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = this.value.trim();
+                if (query) {
+                    alert(`🔍 Recherche de "${query}" sur YASHX...`);
+                }
+            }
+        });
+
+        // Keyboard shortcut
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '/' && document.getElementById('searchInput') !== document.activeElement) {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+        });
+
+        // Tailwind script already loaded
+        console.log("%c✅ Site YASHX chargé avec succès !", "color: #e50914; font-size: 16px; font-weight: bold");
+    </script>
 </body>
 </html>
