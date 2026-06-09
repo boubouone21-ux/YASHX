@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for yashx on 2026-06-09T05:20:41Z
+# fly.toml app configuration file generated for yashx-kzs0mg on 2026-06-09T05:52:45Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'yashx'
+app = 'yashx-kzs0mg'
 primary_region = 'ams'
 
 [build]
