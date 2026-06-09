@@ -7,288 +7,134 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Netflix+Sans:wght@400;700&display=swap');
-        
-        body {
-            font-family: 'Netflix Sans', system-ui, sans-serif;
-        }
-        
+        body { font-family: system-ui, sans-serif; }
         .hero-bg {
-            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('https://picsum.photos/id/1015/1920/1080');
+            background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.9)), url('https://picsum.photos/id/1015/1920/1080');
             background-size: cover;
             background-position: center;
         }
-        
-        .poster {
-            transition: all 0.3s ease;
-        }
-        
-        .poster:hover {
-            transform: scale(1.08);
-            z-index: 10;
-        }
-        
-        .scroll-container {
-            scrollbar-width: none;
-        }
-        
-        .scroll-container::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .nav-active {
-            color: white;
-            border-bottom: 3px solid #e50914;
-        }
+        .poster:hover { transform: scale(1.08); }
+        .scroll-container::-webkit-scrollbar { display: none; }
+        video { width: 100%; max-height: 85vh; background: black; }
     </style>
 </head>
 <body class="bg-black text-white">
-    <!-- Top Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-md z-50">
-        <div class="max-w-screen-2xl mx-auto px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-8">
-                <!-- Logo -->
-                <div onclick="window.location.reload()" class="flex items-center gap-2 cursor-pointer">
-                    <div class="w-10 h-10 bg-red-600 rounded flex items-center justify-center text-3xl font-bold">Y</div>
-                    <span class="text-3xl font-bold tracking-tighter">YASHX</span>
-                </div>
-                
-                <div class="hidden md:flex items-center gap-6 text-sm font-medium">
-                    <a href="#" class="nav-active px-4 py-2">Accueil</a>
-                    <a href="#" class="hover:text-gray-300 px-4 py-2">Séries</a>
-                    <a href="#" class="hover:text-gray-300 px-4 py-2">Films</a>
-                    <a href="#" class="hover:text-gray-300 px-4 py-2">Nouveautés</a>
-                    <a href="#" class="hover:text-gray-300 px-4 py-2">Ma Liste</a>
-                </div>
+
+    <!-- Nav -->
+    <nav class="fixed top-0 w-full bg-black/95 z-50 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-red-600 text-white w-9 h-9 flex items-center justify-center text-2xl font-bold rounded">Y</div>
+                <span class="text-3xl font-bold">YASHX</span>
             </div>
-            
-            <div class="flex items-center gap-4">
-                <div class="relative">
-                    <input type="text" id="searchInput" 
-                           class="bg-zinc-900 text-sm border border-zinc-700 rounded-full pl-10 py-2 w-72 focus:outline-none focus:border-red-600"
-                           placeholder="Rechercher films, séries...">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-3 text-gray-400"></i>
-                </div>
-                <div class="w-8 h-8 bg-zinc-700 rounded-full flex items-center justify-center cursor-pointer hover:bg-zinc-600">
-                    <i class="fa-solid fa-bell"></i>
-                </div>
-                <div class="flex items-center gap-2 cursor-pointer">
-                    <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded"></div>
-                    <span class="text-sm font-medium">Yash</span>
-                </div>
-            </div>
+            <input type="text" id="search" placeholder="Rechercher films, séries..." 
+                   class="bg-zinc-900 px-6 py-3 w-96 rounded-full focus:outline-none">
         </div>
     </nav>
 
-    <!-- Hero Banner -->
-    <div class="hero-bg h-screen pt-20 flex items-center relative">
-        <div class="max-w-screen-2xl mx-auto px-8 z-10">
-            <div class="max-w-md">
-                <h1 class="text-6xl font-bold mb-4 leading-none">THE REVENGE<br>DHURANDHAR</h1>
-                <p class="text-xl mb-2 text-red-500 font-semibold">RAW & UNDEKHHA • UNCENSORED</p>
-                <p class="text-lg mb-6">Un guerrier vengeur dans un monde en flammes. Action, drame et adrénaline pure.</p>
-                
-                <div class="flex gap-4">
-                    <button onclick="playVideo()" 
-                            class="flex items-center gap-3 bg-white text-black px-8 py-4 rounded hover:bg-gray-200 font-semibold text-lg">
-                        <i class="fa-solid fa-play"></i>
-                        LECTURE
-                    </button>
-                    <button onclick="addToMyList()"
-                            class="flex items-center gap-3 bg-white/30 hover:bg-white/40 px-8 py-4 rounded font-semibold text-lg">
-                        <i class="fa-solid fa-plus"></i>
-                        MA LISTE
-                    </button>
-                </div>
-                
-                <div class="mt-8 flex gap-6 text-sm">
-                    <div>Bollywood</div>
-                    <div>Action • Crime • Aventure</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="absolute bottom-10 right-10 flex gap-3">
-            <div class="bg-black/70 px-5 py-2 rounded text-sm flex items-center gap-2">
-                <span class="text-green-400">98% Match</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Content Sections -->
-    <div class="max-w-screen-2xl mx-auto px-8 -mt-20 relative z-20 space-y-12 pb-20">
-        
-        <!-- Top 10 -->
-        <div>
-            <h2 class="text-2xl font-semibold mb-4 flex items-center gap-3">
-                <span class="text-red-600">🔥</span> Top 10 Aujourd'hui sur YASHX
-            </h2>
-            <div class="flex gap-4 overflow-x-auto scroll-container pb-4">
-                <div class="min-w-[220px] relative poster cursor-pointer" onclick="showDetails('Teach You a Lesson')">
-                    <img src="https://picsum.photos/id/201/220/330" class="rounded-xl" alt="">
-                    <div class="absolute -top-1 -left-1 text-7xl font-black text-white/90 drop-shadow-2xl">1</div>
-                </div>
-                <div class="min-w-[220px] relative poster cursor-pointer" onclick="showDetails('Michael Jackson The Verdict')">
-                    <img src="https://picsum.photos/id/237/220/330" class="rounded-xl" alt="">
-                    <div class="absolute -top-1 -left-1 text-7xl font-black text-white/90 drop-shadow-2xl">2</div>
-                </div>
-                <div class="min-w-[220px] relative poster cursor-pointer" onclick="showDetails('Kuroko Basketball')">
-                    <img src="https://picsum.photos/id/180/220/330" class="rounded-xl" alt="">
-                    <div class="absolute -top-1 -left-1 text-7xl font-black text-white/90 drop-shadow-2xl">3</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bollywood & Action -->
-        <div>
-            <h2 class="text-2xl font-semibold mb-4">Bollywood Action</h2>
-            <div class="flex gap-4 overflow-x-auto scroll-container pb-4">
-                <img onclick="showDetails('Dhurandhar')" src="https://picsum.photos/id/1015/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-                <img onclick="showDetails('Dangal')" src="https://picsum.photos/id/133/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-                <img onclick="showDetails('Sully')" src="https://picsum.photos/id/201/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-                <img onclick="showDetails('Gran Turismo')" src="https://picsum.photos/id/180/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-            </div>
-        </div>
-
-        <!-- K-Dramas -->
-        <div>
-            <h2 class="text-2xl font-semibold mb-4">K-Dramas Populaire</h2>
-            <div class="flex gap-4 overflow-x-auto scroll-container pb-4">
-                <img onclick="showDetails('All of Us Are Dead')" src="https://picsum.photos/id/251/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-                <img onclick="showDetails('Bloodhounds')" src="https://picsum.photos/id/274/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-                <img onclick="showDetails('Happiness')" src="https://picsum.photos/id/201/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-                <img onclick="showDetails('Trigger')" src="https://picsum.photos/id/133/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-            </div>
-        </div>
-
-        <!-- Sci-Fi & Fantasy -->
-        <div>
-            <h2 class="text-2xl font-semibold mb-4">Sci-Fi & Fantasy</h2>
-            <div class="flex gap-4 overflow-x-auto scroll-container pb-4">
-                <img onclick="showDetails('Lord of the Rings')" src="https://picsum.photos/id/1016/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-                <img onclick="showDetails('Stranger Things')" src="https://picsum.photos/id/201/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-                <img onclick="showDetails('Lost in Space')" src="https://picsum.photos/id/180/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-                <img onclick="showDetails('Passengers')" src="https://picsum.photos/id/133/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-            </div>
-        </div>
-
-        <!-- Teen & Award Winning -->
-        <div>
-            <h2 class="text-2xl font-semibold mb-4">Séries Teen & Primées</h2>
-            <div class="flex gap-4 overflow-x-auto scroll-container pb-4">
-                <img onclick="showDetails('Elite')" src="https://picsum.photos/id/237/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-                <img onclick="showDetails('Anne with an E')" src="https://picsum.photos/id/201/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-                <img onclick="showDetails('Wednesday')" src="https://picsum.photos/id/133/220/330" class="min-w-[220px] rounded-xl poster cursor-pointer" alt="">
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer / Bottom Nav -->
-    <div class="fixed bottom-0 left-0 right-0 bg-black border-t border-zinc-800 py-3">
-        <div class="max-w-screen-2xl mx-auto flex justify-around text-xs">
-            <div onclick="window.location.reload()" class="flex flex-col items-center text-red-600 cursor-pointer">
-                <i class="fa-solid fa-house text-2xl"></i>
-                <span class="mt-1">Accueil</span>
-            </div>
-            <div class="flex flex-col items-center text-gray-400 hover:text-white cursor-pointer">
-                <i class="fa-solid fa-tv text-2xl"></i>
-                <span class="mt-1">Séries</span>
-            </div>
-            <div class="flex flex-col items-center text-gray-400 hover:text-white cursor-pointer">
-                <i class="fa-solid fa-film text-2xl"></i>
-                <span class="mt-1">Films</span>
-            </div>
-            <div class="flex flex-col items-center text-gray-400 hover:text-white cursor-pointer">
-                <i class="fa-solid fa-list text-2xl"></i>
-                <span class="mt-1">Ma Liste</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="modal" class="hidden fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
-        <div class="max-w-2xl w-full mx-4 bg-zinc-900 rounded-2xl overflow-hidden">
-            <div id="modal-content" class="p-8">
-                <!-- Dynamic content -->
-            </div>
-            <div class="flex justify-end p-4 border-t border-zinc-700">
-                <button onclick="closeModal()" 
-                        class="px-8 py-3 bg-red-600 hover:bg-red-700 rounded font-medium">
-                    FERMER
+    <!-- Hero -->
+    <div class="hero-bg h-screen flex items-center pt-20">
+        <div class="max-w-3xl px-8">
+            <h1 class="text-6xl font-bold mb-2">THE REVENGE DHURANDHAR</h1>
+            <p class="text-red-500 text-xl mb-4">RAW & UNDEKHHA • UNCENSORED</p>
+            <p class="text-xl mb-8">Un guerrier vengeur dans un monde en flammes.</p>
+            
+            <div class="flex gap-4">
+                <button onclick="playMovie('dhurandhar')" 
+                        class="bg-white text-black px-10 py-4 rounded font-bold flex items-center gap-3 text-lg hover:bg-gray-200">
+                    <i class="fa-solid fa-play"></i> LECTURE
+                </button>
+                <button onclick="addToList()" class="bg-white/30 hover:bg-white/40 px-10 py-4 rounded font-bold flex items-center gap-3 text-lg">
+                    <i class="fa-solid fa-plus"></i> MA LISTE
                 </button>
             </div>
         </div>
     </div>
 
+    <div class="max-w-7xl mx-auto px-6 -mt-12 relative z-10 space-y-12 pb-20">
+        <h2 class="text-2xl font-bold mb-6">🔥 Top 10 Aujourd'hui sur YASHX</h2>
+        <div class="flex gap-4 overflow-x-auto scroll-container">
+            <img src="https://picsum.photos/id/201/240/360" onclick="playMovie('lesson')" class="poster rounded-xl min-w-[240px] cursor-pointer" alt="Teach You a Lesson">
+            <img src="https://picsum.photos/id/237/240/360" onclick="playMovie('verdict')" class="poster rounded-xl min-w-[240px] cursor-pointer" alt="">
+            <img src="https://picsum.photos/id/1015/240/360" onclick="playMovie('dhurandhar')" class="poster rounded-xl min-w-[240px] cursor-pointer" alt="">
+        </div>
+    </div>
+
+    <!-- VIDEO MODAL -->
+    <div id="videoModal" class="hidden fixed inset-0 bg-black/95 z-[100] flex items-center justify-center">
+        <div class="w-full max-w-5xl mx-4">
+            <div class="flex justify-between items-center mb-4 px-2">
+                <h2 id="modalTitle" class="text-2xl font-bold"></h2>
+                <button onclick="closeVideo()" class="text-4xl hover:text-red-500">&times;</button>
+            </div>
+            
+            <div class="bg-black rounded-xl overflow-hidden">
+                <video id="mainVideo" controls autoplay class="w-full">
+                    Votre navigateur ne supporte pas la vidéo.
+                </video>
+            </div>
+            
+            <div class="text-center text-sm text-gray-400 mt-4">
+                <p>YASHX - Lecteur Vidéo</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        function playVideo() {
-            alert("🎬 Lecture du film en cours...\n\n(YASHX - Mode démo - Vidéo placeholder)");
+        const videoPlayer = document.getElementById('mainVideo');
+        const modal = document.getElementById('videoModal');
+        const modalTitle = document.getElementById('modalTitle');
+
+        // Exemples de vidéos (tu peux changer les liens)
+        const videos = {
+            dhurandhar: {
+                title: "The Revenge Dhurandhar",
+                src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"  // Vidéo test gratuite
+            },
+            lesson: {
+                title: "Teach You a Lesson",
+                src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+            },
+            verdict: {
+                title: "Michael Jackson The Verdict",
+                src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
+            }
+        };
+
+        function playMovie(key) {
+            const video = videos[key];
+            if (!video) {
+                alert("Vidéo en cours de préparation...");
+                return;
+            }
+            
+            modalTitle.textContent = video.title;
+            videoPlayer.src = video.src;
+            modal.classList.remove('hidden');
+            videoPlayer.play();
         }
 
-        function addToMyList() {
+        function closeVideo() {
+            videoPlayer.pause();
+            videoPlayer.src = '';
+            modal.classList.add('hidden');
+        }
+
+        function addToList() {
             alert("✅ Ajouté à Ma Liste !");
         }
 
-        function showDetails(title) {
-            const modal = document.getElementById('modal');
-            const content = document.getElementById('modal-content');
-            
-            content.innerHTML = `
-                <div class="flex gap-8">
-                    <div class="w-52 flex-shrink-0">
-                        <img src="https://picsum.photos/id/1015/400/550" class="rounded-2xl shadow-2xl" alt="">
-                    </div>
-                    <div>
-                        <h1 class="text-4xl font-bold mb-2">${title}</h1>
-                        <div class="flex gap-4 text-sm mb-6">
-                            <span class="text-green-400">98% Match</span>
-                            <span>2025</span>
-                            <span class="bg-zinc-700 px-2 rounded">16+</span>
-                            <span>2h 18min</span>
-                        </div>
-                        <p class="text-lg leading-relaxed mb-8">
-                            Un chef-d'œuvre d'action et de drame. ${title} vous emmène dans un voyage intense rempli d'émotions et de scènes époustouflantes.
-                        </p>
-                        <div class="grid grid-cols-2 gap-8 text-sm">
-                            <div>
-                                <div class="text-gray-400">Genres</div>
-                                <div>Action • Drame • Thriller</div>
-                            </div>
-                            <div>
-                                <div class="text-gray-400">Cast</div>
-                                <div>Aamir Khan, Ranbir Kapoor, etc.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            modal.classList.remove('hidden');
-        }
+        // Fermer avec Echap
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") closeVideo();
+        });
 
-        function closeModal() {
-            document.getElementById('modal').classList.add('hidden');
-        }
-
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        // Recherche
+        document.getElementById('search').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                const query = this.value.trim();
-                if (query) {
-                    alert(`🔍 Recherche de "${query}" sur YASHX...`);
-                }
+                alert("🔍 Recherche de : " + e.target.value + " (bientôt disponible)");
             }
         });
-
-        // Keyboard shortcut
-        document.addEventListener('keydown', function(e) {
-            if (e.key === '/' && document.getElementById('searchInput') !== document.activeElement) {
-                e.preventDefault();
-                document.getElementById('searchInput').focus();
-            }
-        });
-
-        // Tailwind script already loaded
-        console.log("%c✅ Site YASHX chargé avec succès !", "color: #e50914; font-size: 16px; font-weight: bold");
     </script>
 </body>
 </html>
